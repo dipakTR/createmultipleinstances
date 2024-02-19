@@ -1,0 +1,27 @@
+name: create ec2 instance
+on:
+  push:
+     branches:
+        - main
+
+jobs:
+  create_multiple_EC2_instances:
+     name: Create EC2 Instance
+     runs-on: ubuntu-latest
+     steps:
+        - name: checkout repository
+          uses: actions/checkout@v2
+        - name: configure aws credentials
+          uses: aws-actions/configure-aws-credentials@v2
+          with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ap-south-1
+              
+        - name: install AWS cli
+          run: |
+             sudo apt-get update -y
+             sudo apt-get install -y awscli
+        - name: create EC2 instance
+          run: |
+             aws ec2 run-instances --image-id ami-03f4878755434977f --count-3 --instance-type t2.micro --key-name docker_keypair --subnet-id 	subnet-048ef798328b15dd6 --security-group-ids sg-0a4ec3d42167e780b --tag-specifications 'ResourceType=instance,Tags=[{Key=My_Instance,Value=<EC2_Instance>}]'
