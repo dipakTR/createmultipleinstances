@@ -1,4 +1,4 @@
-name: create ec2 instance
+name: create multiple ec2 instance
 on:
   push:
      branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   create_multiple_EC2_instances:
-     name: Create EC2 Instance
+     name: Create multiple EC2 Instances
      runs-on: ubuntu-latest
      steps:
         - name: checkout repository
@@ -24,4 +24,4 @@ jobs:
              sudo apt-get install -y awscli
         - name: create EC2 instance
           run: |
-             aws ec2 run-instances --image-id ami-03f4878755434977f --count-3 --instance-type t2.micro --key-name docker_keypair --subnet-id 	subnet-048ef798328b15dd6 --security-group-ids sg-0a4ec3d42167e780b --tag-specifications 'ResourceType=instance,Tags=[{Key=My_Instance,Value=<EC2_Instance>}]'
+             aws ec2 run-instances --image-id ami-03f4878755434977f --count-3 --instance-type t2.micro --key-name docker_keypair --subnet-id 	subnet-048ef798328b15dd6 --security-group-ids sg-0a4ec3d42167e780b
