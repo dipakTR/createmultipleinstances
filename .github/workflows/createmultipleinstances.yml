@@ -24,4 +24,4 @@ jobs:
              sudo apt-get install -y awscli
         - name: create EC2 instance
           run: |
-             aws ec2 run-instances --image-id ami-03f4878755434977f --count-3 --instance-type t2.micro --key-name docker_keypair --subnet-id 	subnet-048ef798328b15dd6 --security-group-ids sg-0a4ec3d42167e780b
+             aws ec2 run-instances --image-id ami-03f4878755434977f --count 3 --instance-type t2.micro --key-name docker_keypair --subnet-id 	subnet-048ef798328b15dd6 --security-group-ids sg-0a4ec3d42167e780b
